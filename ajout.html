@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <title>Inscription / Connexion</title>
+  </head>
+  <body>
+      <div class="container">
+                <form action="" id="inscForm">
+            <div class="row">
+                <div class="col-12" id="erreur"></div>
+                <div class="col-6">
+                 <label>Nom</label><br>
+                 <input type="text" name="nom" id="nom" class="w-75">
+                </div>
+                <div class="col-6">
+                 <label>Prix</label><br>
+                 <input type="text" name="prix" id="prix" class="w-75">
+                </div>
+                <div class="col-6">
+                 <label>Description</label><br>
+                    <textarea name="description"></textarea>
+                </div>
+                <div class="col-12">
+                    <button class="btn btn-success" id="inscOK">OK</button>
+                </div>
+            </div>
+        </form>
+        </div>
+
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script
+    src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script>
+        $('#inscForm').submit(function(event){
+            $('#erreur').empty();
+            //Empeche la recharge de la page
+            event.preventDefault();
+
+                //serialize recupere tous les champs du form et les mets en json
+                console.log( $( this ).serialize() );
+                $.ajax({
+                    type: 'post',
+                    url: 'ajout.php',
+                    data: $( this ).serialize(),
+                    timeout: 3000,
+                    success: function(data){
+                        console.log(data);
+                        if(data = 'ok')
+                        {
+                            $('#erreur').html('Bien enregistre');
+                        }
+                    },
+                    error: function(){
+                        $('#erreur').html('Cette requête AJAX n\'a pas abouti');
+                    }
+                });
+x
+        });
+    </script>
+
+
+  </body>
+</html>
